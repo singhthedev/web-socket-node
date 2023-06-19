@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const session = require("express-session");
 const socket = require("socket.io");
 const app = express();
@@ -13,6 +12,8 @@ require('./config/db')
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+console.log("__dirname:", __dirname);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: "ChatV2", resave: false, saveUninitialized: true }));
