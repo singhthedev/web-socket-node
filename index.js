@@ -18,9 +18,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: "ChatV2", resave: false, saveUninitialized: true }));
 
-app.get("/", function (req, res) {
-  res.send("Hello World");
-});
 
 const port = 3000;
 const io = socket(app.listen(port, () => {
