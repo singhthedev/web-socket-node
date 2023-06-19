@@ -19,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: "ChatV2", resave: false, saveUninitialized: true }));
 
 
+
 const port = 3000;
 const io = socket(app.listen(port, () => {
   console.log(`Server si running on ${port} ...👍️`);

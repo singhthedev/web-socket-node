@@ -1,4 +1,4 @@
-const socket = io.connect("http://localhost:3000");
+const socket = io.connect("https://live-chating.onrender.com");
 
 const sender = document.querySelector("#Name");
 const text = document.querySelector("#textmessage");
