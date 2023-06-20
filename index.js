@@ -12,7 +12,6 @@ require('./config/db')
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-console.log("__dirname:", __dirname);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
