@@ -41,7 +41,7 @@ const registerUser = async (req, res) => {
 
 const renderLoginPage = (req, res) => {
   if (!req.session.name) {
-    res.render("index", { title: "login" });
+    res.render("login", { title: "login" });
   } else {
     res.redirect("/chat");
   }
