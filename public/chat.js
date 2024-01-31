@@ -1,4 +1,4 @@
-const socket = io.connect("https://live-chating.onrender.com");
+const socket = io();
 
 const sender = document.querySelector("#Name");
 const text = document.querySelector("#textmessage");
@@ -6,17 +6,19 @@ const submit = document.querySelector("#send");
 const contents = document.querySelector("#message");
 
 submit.addEventListener("click", () => {
-  socket.emit("chat", {
-    message: text.value,
-    sender: sender.innerHTML,
-  });
+  const message = text.value.trim();
+  if (message) {
+    socket.emit("chat", {
+      message: text.value,
+      sender: sender.innerHTML,
+    });
+    text.value = "";
+  }
 });
+
 socket.on("chat", (data) => {
-  contents.innerHTML +=
-    "<ul><li id='username'>" +
-    data.sender +
-    " : </li><li id = 'textcont'>" +
-    data.message +
-    "</li></ul>";
-  text.value = " ";
+  const { sender, message } = data;
+  const listItem = document.createElement("li");
+  listItem.textContent = `${sender}: ${message}`;
+  contents.appendChild(listItem);
 });

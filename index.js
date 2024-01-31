@@ -1,27 +1,33 @@
-const express = require("express");
-const session = require("express-session");
-const socket = require("socket.io");
+import express from "express";
+import session from "express-session";
+import { Server as SocketServer } from "socket.io";
+import path from 'path';
 const app = express();
+import('./config/db.js')
 
-const LoginRouter = require("./routers/loginRouter");
-const RegisterRouter = require("./routers/registerRouter");
-const chatRouter = require("./routers/chatRouter");
-const Logout = require("./routers/logoutRouter");
-
-require('./config/db')
 
 app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public"));
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: "ChatV2", resave: false, saveUninitialized: true }));
 
 
+import Routers from "./routers/routes.js";
+
+
+app.use('/', Routers)
+
 
 const port = 5000;
-const io = socket(app.listen(port, () => {
-  console.log(`Server is running on ${port} ...👍️`);
+const io = new SocketServer(app.listen(port, () => {
+  console.log(`Server is running on ${port} ...🚀`);
+  const error = false;
+  if (error) {
+    console.log("Error in running server...🫣", error);
+  }
 }));
 
 io.on("connection", (socket) => {
@@ -34,11 +40,8 @@ io.on("connection", (socket) => {
   });
 });
 
-app.use(LoginRouter);
-app.use(RegisterRouter);
-app.use(chatRouter);
-app.use(Logout);
 
 app.use(function (req, res) {
   res.status(404).end("404 NOT FOUND");
 });
+
