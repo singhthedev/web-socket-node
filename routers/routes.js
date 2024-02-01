@@ -6,7 +6,8 @@ import {
     registerUser,
     renderLoginPage,
     loginUser,
-} from "../controller/registerController.js";
+    getAllusers,
+} from "../controller/userController.js";
 
 router.get("/register", renderRegisterPage);
 router.post("/register", registerUser);
@@ -28,5 +29,7 @@ router.get("/logout", (req, res) => {
     }
     res.redirect("/");
 });
+
+router.get("/getUsers", getAllusers);
 
 export default router;

@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="stylesheet" href="/nav.css" />
-    <link rel="stylesheet" href="/chat.css" />
-    <link rel="stylesheet" href="/main.css" />
-    <title>Chat</title>
-  </head>
-  <body>
-    <div class="nav">
-      <ul>
-        <li><a href="#">Chat</a></li>
-        <li><span id="Name"><%=name %> </span></li>
-        <li><a href="/logout">logout</a></li>
-      </ul>
+<head>
+  <link rel="stylesheet" href="/nav.css" />
+  <link rel="stylesheet" href="/chat.css" />
+  <link rel="stylesheet" href="/main.css" />
+  <title>Chat</title>
+</head>
+<body>
+  <div class="nav">
+    <ul>
+      <li><a href="#">Chat</a></li>
+      <li><span id="Name"><%=name %> </span></li>
+      <li><a href="/logout">logout</a></li>
+    </ul>
+  </div>
+  <div class="contents">
+    <div class="userList">
+      <h3>User List</h3>
+      <ul id="userList"></ul>
     </div>
-    <div class="contents">
-      <div class="GeneralChat">
-        <div id="message"></div>
-          <div class="writebox">
-            <input type="text" name="textmessage" placeholder="Write Somethings.." value="" id="textmessage">
-            <input type="submit" name="send" value="Send" id="send">
-          </div>
-        </div>
+    <div class="GeneralChat">
+      <div id="message"></div>
+      <div class="writebox">
+        <input type="text" name="textmessage" placeholder="Write Something.." id="textmessage">
+        <button onclick="sendMessage()" id="send" name="send" value="Send">Send</button>
       </div>
     </div>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/chat.js"></script>
-  </body>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/chat.js"></script>
+  <script>
+  </script>
+</body>
 </html>

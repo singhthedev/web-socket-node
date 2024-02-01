@@ -69,9 +69,41 @@ const loginUser = async (req, res) => {
   }
 };
 
+const renderChatPage = (req, res) => {
+  if (req.session.name) {
+      // Assuming you have a function to fetch users from your database
+      User.find({}, (err, users) => {
+          if (err) {
+              console.error(err);
+              res.status(500).send('Error fetching users');
+          } else {
+              res.render('chat', { title: 'Chat', name: req.session.name, users: users });
+          }
+      });
+  } else {
+      res.redirect("/");
+  }
+};
+
+const getAllusers = async(req, res)=>{
+  try {
+    const users = await User.find({});
+    if(users.lenght > 0){
+      res.send('No user found')
+    }
+    else{
+      res.send(users)
+    }
+  } catch (error) {
+    
+  }
+}
+
+
 export {
   renderRegisterPage,
   registerUser,
   renderLoginPage,
-  loginUser
+  loginUser,
+  getAllusers
 };

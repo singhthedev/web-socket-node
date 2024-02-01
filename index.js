@@ -32,11 +32,18 @@ const io = new SocketServer(app.listen(port, () => {
 
 io.on("connection", (socket) => {
   console.log(socket.id + " a user connected");
+
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
+
   socket.on("chat", (data) => {
     io.sockets.emit("chat", data);
+  });
+
+  socket.on("privateChat", (data) => {
+    // Send the private message only to the recipient
+    io.to(data.recipient).emit("privateChat", data);
   });
 });
 
